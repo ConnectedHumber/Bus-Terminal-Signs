@@ -86,11 +86,13 @@ Sets the panels into binary mode which allows us to address each pixel separatel
 ```
 void setScan(int totaldigits);
 ```
+
 Used to configure the AS1100 number of digit lines (8). This is used by begin() so you don't need to call it.
 
 ## setIntensity(level,chip)
 ```
 void setIntensity(int level,int chip);
+```
 
 Sets the intensity of one AS1100 chip (character) or ALL chips if chip=-1. Note you cannot set the intensity of individual LEDs.
 
@@ -100,6 +102,7 @@ The range of level is 0-32. begin() sets the intial intensity to 5
 ```
 void setIndividualIntensity(int chips[]);	// provide an array of intensities, one per chip
 ```
+
 This allows you to set the intensity of each character in one go. You provide an array of intensity values.
 
 Note that the code does not check if the length of chips is correct
@@ -109,18 +112,22 @@ Note that the code does not check if the length of chips is correct
 ```
 void displayOn(int state
 ```
-Entire matrix is turned on when state=1 and off when state=0. The panel can still be programmed whilst the display is off it just won't appear till you turn the display on again.
+
+The entire matrix is turned on when state=1 and off when state=0. The panel can still be programmed whilst the display is off it just won't appear till you turn the display on again.
 
 ## sendPixels()
 ```
 void sendPixels();
 ```
+
 Called by display() to send the pixel array to the panel. display() is just a convenience wrapper to make the code more readable. Other LCD panels, like the SD1306, is display() as a command to send the pixel buffer to the display,.
+
 ## setPixel(x,y,on)
 ```
 void setPixel(int x, int y,uint8_t on); // pixels can only be on or off
 ```
-This does all the necessary jiggery pokery to set segment bits in the AS1100 chip corresponding to the X position.
+
+This does all the necessary jiggery pokery to set segment bits in the pixel array for the AS1100 chip corresponding to the X position.
 
 Is on=1 the LED will be on after display() is called. If zero then the LED will be off
 
@@ -134,6 +141,7 @@ returns the pixel state at x,y as 0 (off) or 1 (on)
 ```
 void scrollRow(int dir,int row,bool wrap);
 ```
+
 Scrolls a row of pixels using getPixel() and setPixel(). This needs to be reinvented to shift bit patterns in the pixel array to speed it up.You need to call display() to show changes.
 
 Pixels are shifted by one position on each call.
@@ -143,15 +151,18 @@ dir   1 means left to right, -1 means right to left
 row   0-7, the row to be scrolled
 wrap  if true wrap the scrolling
 ```
+
 ## scrollRows(dir,wrap)
 ```
 void scrollRows(int dir,bool wrap);
 ```
 Scrolls all rows at the same time.
+
 ## scrollColumn(dir,col,wrap)
 ```
 void scrollColumn(int dir,int col,bool wrap);
 ```
+
 Scrolls a column of pixels up or down (The Matrix effect - only smaller)
 
 ```
@@ -164,6 +175,7 @@ wrap  if true wrap the scrolling
 ```
 void scrollColumns(int dir,bool wrap);
 ```
+
 Scrolls all columns up or down one pixel on each call.
 
 ## dumpPixels()
@@ -186,10 +198,12 @@ This arrangement has the advantage that the pixel array can be sent to the chips
 The driver library sub-classes the Adafruit_GFX library thus allowing you to use the routines to write text or draw on the panel.
 
 NOTE: Adafruit routines often expect uint16_t not int data types so you may need to cast ints to uint16_t like this:-
+
 ```
 Panel p(...);
 p.drawLine((uint16_t) x0,(uint16_t) y0,(uint16_t) x1,uint(16_t) y1,(uint16_t) color);
 ```
+
 or use uint16_t in your code.
 
 Note the Adafruit_GFX routines expect a color argument. Since the panel LEDs can only be on or off this library sets the LED on if color>0 and off if 0.
