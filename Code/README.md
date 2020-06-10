@@ -29,7 +29,7 @@ The panels comprise of a number of AS1100 chips, one per LED sub-panel (normally
 ```
 bool begin();			
 ```
-	begin() initialises CLK,LOAD,DATA signal states. It also allocates memory for the pixel (LED) data array
+begin() initialises CLK,LOAD,DATA signal states. It also allocates memory for the pixel (LED) data array
   
 ## display()
 
