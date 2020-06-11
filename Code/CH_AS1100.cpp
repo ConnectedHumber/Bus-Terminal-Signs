@@ -166,6 +166,7 @@ void Panel::drawPixel(int16_t x,int16_t y,uint16_t color){
 	// pixels
 	//Serial.println("drawPixel x:"+String(x)+" y:"+String(y)+" color:"+String(color));
 	uint8_t on=color>0?1:0;
+
 	setPixel(x,y,on);
 }
 
@@ -232,6 +233,9 @@ void Panel::setIndividualIntensity(int chips[]){
 uint8_t Panel::getPixel(int col,int row){ // humans like x,y order
   // array is in [row][col] order
   //
+  if (col>_numColumns || col<0) return 0;
+  if (row>7 || row<0) return 0;
+	
   int chip=col/6;
   uint8_t mask=1<<(col%6);
   return (pixels[row][chip] & mask)?1:0;
@@ -241,6 +245,9 @@ void Panel::setPixel(int col,int row,uint8_t value){
   // value is reduced to 1 or 0 in drawPixel
   //Serial.println("setPixel col:"+String(col)+" row:"+String(row)+" value:"+String(value));
   
+  if (col>_numColumns || col<0) return;
+  if (row>7 || row<0) return;
+	
   int chip=col/6;
   uint8_t mask=1<<(col%6);
   uint8_t chipBits=pixels[row][chip];
@@ -310,14 +317,20 @@ void Panel::scrollRow(int dir,int row,bool wrap=false){
   
 	if (dir>0) { // LEFT
 		if (wrap) prev=getPixel(col,row);
-		while(col<_numColumns) setPixel(col,row,getPixel(++col,row));
+		while(col<_numColumns) {
+			setPixel(col,row,getPixel(col+1,row));
+			col++;
+		}
 		setPixel(col,row,prev);
 	}
 	else{ // RIGHT
 		col=_numColumns-1; // zero based
 		
 		if (wrap) prev=getPixel(col,row);
-		while(col>0) setPixel(col,row,getPixel(--col,row));
+		while(col>0) {
+		setPixel(col,row,getPixel(col-1,row));
+			col--;
+			}
 		setPixel(col,row,prev);
 	}
 }
