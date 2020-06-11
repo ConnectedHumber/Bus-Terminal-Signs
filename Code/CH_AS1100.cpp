@@ -66,6 +66,7 @@ for (row=0;row<ROWS_PER_CHIP-1;row++){
 		else Serial.print(" ");
 		}
 	}
+Serial.println();
 }
 void Panel::showCell(int x,int y,int val){
 	Serial.print("row:"); Serial.print(y);
@@ -251,8 +252,8 @@ void Panel::setPixel(int col,int row,uint8_t value){
   int chip=col/6;
   uint8_t mask=1<<(col%6);
   uint8_t chipBits=pixels[row][chip];
-  
-  if ((chipBits & mask) && (value==0)) pixels[row][chip]=chipBits & mask;
+
+  if (value==0)   pixels[row][chip]=chipBits & ~mask;
   else pixels[row][chip]=chipBits  | mask;
   
   return;
@@ -312,31 +313,34 @@ void Panel::setScan(int totaldigits){
 void Panel::scrollRow(int dir,int row,bool wrap=false){
 	// scrolls one horizontal column only
 	// dir>0 means LEFT, dir<0 means RIGHT
-	uint8_t prev=0;
+	uint8_t carry=0;
     int col=0;
   
-	if (dir>0) { // LEFT
-		if (wrap) prev=getPixel(col,row);
-		while(col<_numColumns) {
-			setPixel(col,row,getPixel(col+1,row));
-			col++;
-		}
-		setPixel(col,row,prev);
-	}
-	else{ // RIGHT
-		col=_numColumns-1; // zero based
+	if (dir>0) { // RIGHT
+		int lastCol=_numColumns-1;
 		
-		if (wrap) prev=getPixel(col,row);
-		while(col>0) {
-		setPixel(col,row,getPixel(col-1,row));
-			col--;
+		if (wrap) carry=getPixel(lastCol,row);
+		
+		for (col=lastCol;col>=1;col--) 
+			{
+			uint8_t pix=getPixel(col-1,row);
+			setPixel(col,row,getPixel(col-1,row));	
+			if (getPixel(col,row)!=pix)	Serial.println("pixel set does not match ");
 			}
-		setPixel(col,row,prev);
+		setPixel(0,row,carry);
+	}
+	else{ // LEFT
+		int lastCol=_numColumns-1;
+		
+		if (wrap) carry=getPixel(0,row);
+		Serial.print("dir <-, carry "); Serial.print(carry);Serial.print(" at "); Serial.print(col); Serial.print(","); Serial.println(row);
+		for (col=0;col<lastCol;col++) setPixel(col,row,getPixel(col+1,row));
+		setPixel(lastCol,row,carry);
 	}
 }
 
 void Panel::scrollRows(int dir,bool wrap=false){
-  for (int row=0;row<ROWS_PER_CHIP;row++)
+  for (int row=0;row<ROWS_PER_CHIP-1;row++)
 	scrollRow(dir,row,wrap);
 }
 
@@ -344,20 +348,20 @@ void Panel::scrollColumn(int dir,int col,bool wrap=false){
 	// scrolls one vertical column only
 	// dir>0 means UP, dir<0 means down
 
-	uint8_t prev=0;
+	uint8_t carry=0;
 	int row=0;
     
 	if (dir>0) { // up
-		if (wrap) prev=getPixel(col,row);	
+		if (wrap) carry=getPixel(col,0);	
 		while(row<ROWS_PER_CHIP) setPixel(col,row,getPixel(col,++row));
-		setPixel(col,row,prev);
+		setPixel(col,row,carry);
 	}
 	else{ // down
 		row=ROWS_PER_CHIP;
 		
-		if (wrap) prev=getPixel(col,row);
+		if (wrap) carry=getPixel(col,7);
 		while(row>0) setPixel(col,row,getPixel(col,--row));
-		setPixel(col,row,prev);
+		setPixel(col,row,carry);
 	}
 }
 
