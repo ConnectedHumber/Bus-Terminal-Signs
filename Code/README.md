@@ -31,7 +31,7 @@ It also allocates memory for the pixel (LED) data array
 ```
 bool begin();			
 ```
-begin() initialises CLK,LOAD,DATA signal states. 
+begin() initialises CLK,LOAD,DATA signal states. Sets up the panel ready to use.
   
 ## display()
 
