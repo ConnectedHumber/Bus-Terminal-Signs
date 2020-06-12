@@ -23,13 +23,15 @@ Your code needs these includes.
 Panel(int dataPin,int clkPin,int LoadPin, int NumChips);
 ```
 
-The panels comprise of a number of AS1100 chips, one per LED sub-panel (normally one character). The full panel has 192 LEDs controlled by 32 AS1100 chips
+The panels comprise of a number of AS1100 chips, one per LED sub-panel (normally one character). The full panel has 192 LEDs controlled by 32 AS1100 chips.
+
+It also allocates memory for the pixel (LED) data array
   
 ## begin()
 ```
 bool begin();			
 ```
-begin() initialises CLK,LOAD,DATA signal states. It also allocates memory for the pixel (LED) data array
+begin() initialises CLK,LOAD,DATA signal states. 
   
 ## display()
 
