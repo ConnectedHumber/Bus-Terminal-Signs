@@ -186,7 +186,7 @@ void dumpPixels();
 ```
 A debugging method - outputs the contents of the pixel array to the serial monitor port as a series of 1's and spaces. Spaces represent LEDs in the off state. It looks like this :-
 
-![dumpPixels](https://github.com/ConnectedHumber/Bus-Terminal-Signs/blob/master/pics/dumpPixels.jpg)
+![dumpPixels](/pics/dumpPixels.jpg)
   
  ## Pixel array
 ```

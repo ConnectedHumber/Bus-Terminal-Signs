@@ -7,7 +7,7 @@ The unit consists of a number of LED sub-panels which plug into the main LED pan
 Don't get too excited about using the LED sub-modules on their own because the pins are on a 2mm spacing. That's ok for using Dupont cables. 
 
 The sign has a hinged contruction for maiantenance access.
-![access](https://github.com/ConnectedHumber/Bus-Terminal-Signs/blob/master/pics/Panel%20Opened%20for%20Maintenence.jpg)
+![access](pics/Panel%20Opened%20for%20Maintenence.jpg)
 
 The LED control panels use two AS1100 chips perl LED sub-panel providing 2 characters (if you use text only). We are able to drive these panels as if they were a simple matrix.
 
@@ -15,19 +15,19 @@ The LED control panels use two AS1100 chips perl LED sub-panel providing 2 chara
 The unit power and ethernet cables feed through a filter PCB (shown at right on this picture) then on to the 150W 5V DC power supply for the LED panels and to a separate AC-DV 5V for the CPU.
 
 This picture shows the control modules:- 
-![control](https://github.com/ConnectedHumber/Bus-Terminal-Signs/blob/master/pics/Control%20Modules.png)
+![control](pics/Control%20Modules.png)
 
 # LED sub-panel matrix
 
 This diagram shows how the pins on the led sub panels are connected to the LEDs.
 
-![led matrix](https://github.com/ConnectedHumber/Bus-Terminal-Signs/blob/master/pics/LED%20matrix.jpg)
+![led matrix](pics/LED%20matrix.jpg)
 
 # Ribbon cable
 
 The ribbon cable which connects the interface to the LED panel has these designations.
 
-![ribbon cable](https://github.com/ConnectedHumber/Bus-Terminal-Signs/blob/master/pics/Ribbon%20Cable.jpg)
+![ribbon cable](pics/Ribbon%20Cable.jpg)
 
 The LED panel inverts the CLK and LOAD signals using a hex schmitt invertor so you need to invert them in code OR use a schmitt invertor.
 
