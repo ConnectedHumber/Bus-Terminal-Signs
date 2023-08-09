@@ -125,7 +125,7 @@ boolean Panel::begin(){
    
   sendPixels();
   
-  displayOn(true);
+  displayOn(1);
   return true;
 }
 
@@ -459,7 +459,7 @@ void Panel::setClockMode(int m){
 }
 
 /*
-* void displayOn(bool state)
+* void displayOn(int state)
 *
 * Turns the panel on/off. This needs to be called
 * to see anything. Can be called to flash the display
@@ -469,8 +469,8 @@ void Panel::setClockMode(int m){
 *
 */
 
-void Panel::displayOn(bool state){
-	if (state) sendCmd(0x0C01);
+void Panel::displayOn(int state){
+	if (state != 0) sendCmd(0x0C01);
 	else sendCmd(0x0C00);
 }
 
