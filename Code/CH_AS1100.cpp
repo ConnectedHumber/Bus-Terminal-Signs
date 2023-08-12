@@ -20,6 +20,7 @@
 #define NEXT_PULSE_DELAY 1 // 1 microseconds, duration of SPACE following MARK
 
 #define INVERTED
+#define USE_SPI
 
 /*
  * Panel(int dataPin,int clkPin,int loadPin, int numChips )
@@ -215,8 +216,13 @@ void Panel::writeDigit(int digit, uint8_t d)
  */
 void Panel::write16(int d)
 {
-  // first 4 bits are don't care so we send zeros
-  // caller must call load() if this is the last write16
+// first 4 bits are don't care so we send zeros
+// caller must call load() if this is the last write16
+#ifdef USE_SPI
+  SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE3));
+  SPI.transfer16(d);
+  SPI.endTransaction();
+#else
   int mask = 0x0800;
   digitalWrite(_dataPin, LOW); // send leading 0b0000
   delayMicroseconds(1);
@@ -233,6 +239,7 @@ void Panel::write16(int d)
     mask >>= 1;
   }
   digitalWrite(_dataPin, LOW); // end WITH 0 - EASIER TO DEBUG
+#endif
 }
 
 /*
