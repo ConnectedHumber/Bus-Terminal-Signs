@@ -1,6 +1,10 @@
 # Code
 
-This folder contains the library code for driving the BUS terminal Signs. The code is still under development and lacks comments to aid implementation. The code should be placed in a folder inside the Arduino library folder. On my Windows machine that's `C:\Users\brian.000\Documents\arduino\libraries\ConnectedHumber`
+This folder contains the library code for driving the BUS terminal Signs.
+
+For example code see [./Examples](./Examples/).
+
+The code is still under development and lacks comments to aid implementation. The code should be placed in a folder inside the Arduino library folder. On my Windows machine that's `C:\Users\brian.000\Documents\arduino\libraries\ConnectedHumber`
 
 At this point in time the code uses bit-banging to send the signals to the panel. I intend to include SPI at some point.
 
