@@ -10,6 +10,8 @@ The `CH_AS1100.h` and `CH_AS1100.cpp` need to be installed in your Arduino libra
 
 Note that the panels can be programmed when the display is off (see `displayOn()`)
 
+Commands that alter pixels do not change the display. You must call `Panel.display()` to update the panel, after setting the pixels.
+
 ## Includes
 
 Your code needs these includes:
