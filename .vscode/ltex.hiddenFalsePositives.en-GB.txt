@@ -1,0 +1,1 @@
+{"rule":"CD_NN","sentence":"^\\Q5 CLK Clock pin, inverted, for SPI.\\E$"}
