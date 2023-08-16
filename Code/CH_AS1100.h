@@ -26,7 +26,7 @@ public:
   // void drawLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1,uint16_t color);
 
   void setClockMode(int m);
-  void displayTest(boolean state); // all leds turned on if state is true, off if false
+  void displayTest(bool state); // all leds turned on if state is true, off if false
   void setBinaryMode();
   void setScan(int totaldigits);
   void setIntensity(int level, int chip);   // sets intensity of one or all chips (-1 default)
