@@ -29,11 +29,6 @@ var NAVTREE =
       [ "Introduction", "index.html#intro_sec", null ],
       [ "Contributors", "index.html#contribs", null ]
     ] ],
-    [ "Code", "md_Code_README.html", [
-      [ "Includes", "md_Code_README.html#autotoc_md1", null ],
-      [ "Pixel array", "md_Code_README.html#autotoc_md2", null ],
-      [ "<tt>Adafruit_GFX</tt>", "md_Code_README.html#autotoc_md3", null ]
-    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
