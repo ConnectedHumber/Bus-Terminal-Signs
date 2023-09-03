@@ -188,8 +188,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p ><a class="el" href="classPanel.html#af9ed631e14b5a1889a3a118b0c612163">Panel(int dataPin,int clkPin,int loadPin, int numChips )</a></p>
-<p >initialise pins used and allocate array for pixel data </p>
+<p >initialise pins used and allocate array for pixel data</p>
+<p >The panels consist of a number of AS1100 chips, one per LED sub-panel (normally one character). The full panel has 192 LEDs controlled by 32 AS1100 chips.</p>
+<p >It also allocates memory for the pixel (LED) data array </p>
 
 </div>
 </div>
@@ -228,7 +229,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p >bool <a class="el" href="classPanel.html#a9fcf79b0d710d8a5215391a5d4a25c8e">begin()</a></p>
-<p >initialises the panel. Clears the display and makes the display visible </p>
+<p >initialises the panel. Clears the display and makes the display visible</p>
+<p >initializes CLK, LOAD, DATA signal states. Sets up the panel ready to use. </p>
 
 </div>
 </div>
@@ -269,7 +271,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p >void <a class="el" href="classPanel.html#a862653a0fdfbef4e3a8ae34c79300675">display()</a></p>
-<p >sends the pixel buffer to the display It a wrapper for <a class="el" href="classPanel.html#a0a2212d5dd033918d20dd06d4841b4f8">sendPixels()</a> to make coding easier to read. (maybe) </p>
+<p >sends the pixel buffer to the display It a wrapper for <a class="el" href="classPanel.html#a0a2212d5dd033918d20dd06d4841b4f8">sendPixels()</a> to make coding easier to read. (maybe)</p>
+<p >Sends data to the AS1100 chips to light up the LEDs. Currently, this is done by bit banging. SPI comes later. </p>
 
 </div>
 </div>
@@ -290,7 +293,8 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p >void <a class="el" href="classPanel.html#a234643fd8109bd90bb48b4af0e4d0aab">displayOn(int state)</a></p>
 <p >Turns the panel on/off. This needs to be called to see anything. Can be called to flash the display since LED state is not affected</p>
-<p >stat=0 means off, non-zero means on </p>
+<p >stat=0 means off, non-zero means on</p>
+<p >The entire matrix is turned on when state=1 and off when state=0. The panel can still be programmed whilst the display is off it just won't appear till you turn the display on again. </p>
 
 </div>
 </div>
@@ -309,7 +313,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >void <a class="el" href="classPanel.html#a3678908738668704c8dafc0b0790ef66">displayTest(bool state)</a> </p>
+<p >void <a class="el" href="classPanel.html#a3678908738668704c8dafc0b0790ef66">displayTest(bool state)</a></p>
+<p >This is a LED test. Regardless of programming, this turns on all LEDs if state=true and off if state=false.</p>
+<p >It's useful to check that you don't have any burned out LEDs. </p>
 
 </div>
 </div>
@@ -373,8 +379,13 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p >void <a class="el" href="classPanel.html#a0f030ac210cb3969a65738d83d1dd523">dumpPixels()</a></p>
-<p >displays the contents of the pixel array for debugginh </p>
-
+<p >displays the contents of the pixel array for debugginh</p>
+<p >A debugging method - outputs the contents of the pixel array to the serial monitor port as a series of 1's and spaces. Spaces represent LEDs in the off state. It looks like this :-</p>
+<div class="fragment"><div class="line">row 0 1   1   1 1</div>
+<div class="line">row 1  1  1 1  1</div>
+<div class="line">row 2  1  1   1 1</div>
+<div class="line">row 3  1  1 1     1</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="afa2df26b11f956049e9f9b5c1647618c" name="afa2df26b11f956049e9f9b5c1647618c"></a>
@@ -393,7 +404,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p >void filLDisplay(int state)</p>
-<p >Sets the entire pixel buffer to off or on if state is 0 the leds are all off is state is non-zero the leds are all on </p>
+<p >Sets the entire pixel buffer to off or on if state is 0 the leds are all off is state is non-zero the leds are all on</p>
+<p >Note <code>state=1</code> turns all LEDs on, <code>state=0</code> turns all LEDs off. </p>
 
 </div>
 </div>
@@ -479,8 +491,12 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p >void <a class="el" href="classPanel.html#a0436c9aacf6e7a4227891cc41d4a46d9">scrollColumn(int dir,int col, bool wrap)</a></p>
-<p >Scrolls a single column with optional wrap around </p>
-
+<p >Scrolls a single column with optional wrap around</p>
+<p >Scrolls a column of pixels up or down (The Matrix effect - only smaller)</p>
+<div class="fragment"><div class="line">dir   1 means left to right, -1 means right to left</div>
+<div class="line">row   0-7, the row to be scrolled</div>
+<div class="line">wrap  <span class="keywordflow">if</span> <span class="keyword">true</span> wrap the scrolling</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a7f646f0c2b95385bf87a146ec2f11819" name="a7f646f0c2b95385bf87a146ec2f11819"></a>
@@ -509,7 +525,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p >void <a class="el" href="classPanel.html#a7f646f0c2b95385bf87a146ec2f11819">scrollColumns(int dir,bool wrap)</a></p>
-<p >scrolls all columns one row </p>
+<p >scrolls all columns one row</p>
+<p >Scrolls all columns up or down one pixel on each call. </p>
 
 </div>
 </div>
@@ -546,8 +563,13 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p >void <a class="el" href="classPanel.html#a0b67878f714e1e0fb48ddca5f4403bc4">scrollRow(int dir,int row,bool wrap)</a></p>
 <p >if dir&gt;0 scroll left to right if dir&lt;0 scroll right to left</p>
-<p >wrap causes the scrolled row to wrap around. </p>
-
+<p >wrap causes the scrolled row to wrap around.</p>
+<p >Scrolls a row of pixels using <code><a class="el" href="classPanel.html#ad592747fdc9ca8dd5837657c1b234fe8">getPixel()</a></code> and <code><a class="el" href="classPanel.html#aa57591be769bf13745390d2de879a3c0">setPixel()</a></code>. This needs to be reinvented to shift bit patterns in the pixel array to speed it up. You need to call <a class="el" href="classPanel.html#a862653a0fdfbef4e3a8ae34c79300675">display()</a> to show changes.</p>
+<p >Pixels are shifted by one position on each call.</p>
+<div class="fragment"><div class="line">dir   1 means left to right, -1 means right to left</div>
+<div class="line">row   0-7, the row to be scrolled</div>
+<div class="line">wrap  <span class="keywordflow">if</span> <span class="keyword">true</span> wrap the scrolling</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a4781d234834c7bf50cddfc19b2b0bbf6" name="a4781d234834c7bf50cddfc19b2b0bbf6"></a>
@@ -596,7 +618,8 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p >void <a class="el" href="classPanel.html#a0a2212d5dd033918d20dd06d4841b4f8">sendPixels()</a></p>
 <p >sends the pixel array to the panel chips</p>
-<p >called from <a class="el" href="classPanel.html#a862653a0fdfbef4e3a8ae34c79300675">display()</a> </p>
+<p >called from <a class="el" href="classPanel.html#a862653a0fdfbef4e3a8ae34c79300675">display()</a></p>
+<p >Called by <code><a class="el" href="classPanel.html#a862653a0fdfbef4e3a8ae34c79300675">display()</a></code> to send the pixel array to the panel. <code><a class="el" href="classPanel.html#a862653a0fdfbef4e3a8ae34c79300675">display()</a></code> is just a convenience wrapper to make the code more readable. Other LCD panels, like the SD1306, is <code><a class="el" href="classPanel.html#a862653a0fdfbef4e3a8ae34c79300675">display()</a></code> as a command to send the pixel buffer to the display. </p>
 
 </div>
 </div>
@@ -615,7 +638,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p >void <a class="el" href="classPanel.html#a8a1da3bae03aa406031e95f3785a0a28">setBinaryMode()</a></p>
-<p >This puts the chips in binary mode which allows us to control which leds are on/off using the digit and segment lines </p>
+<p >This puts the chips in binary mode which allows us to control which leds are on/off using the digit and segment lines</p>
+<p >Sets the panels into binary mode which allows us to address each pixel separately. The AS1100 is basically intended for 7 segment displays. This is called during <a class="el" href="classPanel.html#a9fcf79b0d710d8a5215391a5d4a25c8e">begin()</a>. </p>
 
 </div>
 </div>
@@ -635,7 +659,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p >void <a class="el" href="classPanel.html#ae586c6a0cfa82a1ad484e61efb9b1ef8">setClockMode(int mode)</a></p>
-<p >See AS1100 datasheet </p>
+<p >The AS1100 chips can be driven by an external clock (See AS1100 data sheet). This is called by <a class="el" href="classPanel.html#a9fcf79b0d710d8a5215391a5d4a25c8e">begin()</a>. </p>
 
 </div>
 </div>
@@ -656,7 +680,9 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p >void <a class="el" href="classPanel.html#a4a194f3597c88bc1cf6ca675da7f36c3">setIndividualIntensity(int chips[])</a></p>
 <p >Sets all the chips to , possibly, different intensities in one go.</p>
-<p >Chips is an array of intensity levels in chip order i.e chips[0] is the first chip. </p>
+<p >Chips is an array of intensity levels in chip order i.e chips[0] is the first chip.</p>
+<p >This allows you to set the intensity of each character in one go. You provide an array of intensity values.</p>
+<p >Note that the code does not check if the length of chips is correct </p>
 
 </div>
 </div>
@@ -686,7 +712,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p >void <a class="el" href="classPanel.html#a9a1baa5eaca372a311afa703fee002ee">setIntensity(int level,int chipNum)</a></p>
-<p >if chipNum is -1 (default) sets ALL chips to same intensity level level can be 0..16 levels outside this range are ignored. </p>
+<p >if chipNum is -1 (default) sets ALL chips to same intensity level level can be 0..16 levels outside this range are ignored.</p>
+<p >Sets the intensity of one AS1100 chip (character) or ALL chips if chip=-1. Note you cannot set the intensity of individual LEDs.</p>
+<p >The range of level is 0-32. <code><a class="el" href="classPanel.html#a9fcf79b0d710d8a5215391a5d4a25c8e">begin()</a></code> sets the initial intensity to 5. </p>
 
 </div>
 </div>
@@ -723,7 +751,9 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p >void <a class="el" href="classPanel.html#aa57591be769bf13745390d2de879a3c0">setPixel(int col,int row,uint8_t value)</a></p>
 <p >col and row are bounds checked no action is taken if out of bounds</p>
-<p >If value is zero clears the pixel otherwise sets the pixel </p>
+<p >If value is zero clears the pixel otherwise sets the pixel</p>
+<p >This does all the necessary jiggery pokery to set segment bits in the pixel array for the AS1100 chip corresponding to the X position.</p>
+<p >Is on=1 the LED will be on after <a class="el" href="classPanel.html#a862653a0fdfbef4e3a8ae34c79300675">display()</a> is called. If zero then the LED will be off </p>
 
 </div>
 </div>
@@ -743,7 +773,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p >void <a class="el" href="classPanel.html#a3aee1085809ceef9317208c438a4bd42">setScan(int totaldigits)</a></p>
-<p >Set the scan mode of the chips - ie,. telling them how many digits lines to use </p>
+<p >Set the scan mode of the chips - ie,. telling them how many digits lines to use</p>
+<p >Used to configure the AS1100 number of digit lines (8). This is used by <a class="el" href="classPanel.html#a9fcf79b0d710d8a5215391a5d4a25c8e">begin()</a> so you don't need to call it. </p>
 
 </div>
 </div>

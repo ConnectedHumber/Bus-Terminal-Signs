@@ -95,6 +95,7 @@ $(document).ready(function(){initNavTree('md_Code_README.html',''); initResizabl
 <div class="contents">
 <div class="textblock"><p >This folder contains the library code for driving the BUS terminal Signs.</p>
 <p >For example code see <a href="./Examples/">./Examples</a>.</p>
+<p >For documentation see the <a href="./CH_AS1100.cpp">code file</a> or <a href="https://ConnectedHumber.github.io/Bus-Terminal-Signs">online documentation</a>.</p>
 <p >The code is still under development and lacks comments to aid implementation. The code should be placed in a folder inside the Arduino library folder. On my Windows machine that's <code>C:\Users\brian.000\Documents\arduino\libraries\ConnectedHumber</code></p>
 <p >At this point in time the code uses bit-banging to send the signals to the panel. I intend to include SPI at some point.</p>
 <p >The library subclasses the Adafruit_GFX library and, as a result, it is possible to use the GFX drawing and text routines in addition to hardware specific routines.</p>
@@ -109,118 +110,17 @@ Includes</h1>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="CH__AS1100_8h.html">CH_AS1100.h</a>&gt;</span></div>
 <div class="ttc" id="aCH__AS1100_8h_html"><div class="ttname"><a href="CH__AS1100_8h.html">CH_AS1100.h</a></div></div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md2"></a>
-constructor</h1>
-<div class="fragment"><div class="line"><a class="code hl_class" href="classPanel.html">Panel</a>(<span class="keywordtype">int</span> dataPin,<span class="keywordtype">int</span> clkPin,<span class="keywordtype">int</span> LoadPin, <span class="keywordtype">int</span> NumChips);</div>
-<div class="ttc" id="aclassPanel_html"><div class="ttname"><a href="classPanel.html">Panel</a></div><div class="ttdef"><b>Definition:</b> CH_AS1100.h:14</div></div>
-</div><!-- fragment --><p >The panels consist of a number of AS1100 chips, one per LED sub-panel (normally one character). The full panel has 192 LEDs controlled by 32 AS1100 chips.</p>
-<p >It also allocates memory for the pixel (LED) data array</p>
-<h1><a class="anchor" id="autotoc_md3"></a>
-&lt;tt&gt;begin()&lt;/tt&gt;</h1>
-<div class="fragment"><div class="line"><span class="keywordtype">bool</span> begin();</div>
-</div><!-- fragment --><p ><code>begin()</code> initializes CLK, LOAD, DATA signal states. Sets up the panel ready to use.</p>
-<h1><a class="anchor" id="autotoc_md4"></a>
-&lt;tt&gt;display()&lt;/tt&gt;</h1>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> display(<span class="keywordtype">void</span>);   <span class="comment">// called to send pixels to the display</span></div>
-</div><!-- fragment --><p >Sends data to the AS1100 chips to light up the LEDs. Currently, this is done by bit banging. SPI comes later.</p>
-<h1><a class="anchor" id="autotoc_md5"></a>
-&lt;tt&gt;fillDisplay(state)&lt;/tt&gt;</h1>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> fillDisplay(<span class="keywordtype">int</span> state);</div>
-</div><!-- fragment --><p >Note <code>state=1</code> turns all LEDs on, <code>state=0</code> turns all LEDs off.</p>
-<h1><a class="anchor" id="autotoc_md6"></a>
-&lt;tt&gt;clearDisplay()&lt;/tt&gt;</h1>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> clearDisplay(<span class="keywordtype">void</span>);</div>
-</div><!-- fragment --><p >Just a convenience wrapper for <code>fillDisplay(0)</code></p>
-<h1><a class="anchor" id="autotoc_md7"></a>
-&lt;tt&gt;invertDisplay()&lt;/tt&gt;</h1>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> invertDisplay();</div>
-</div><!-- fragment --><p >Inverts the pixel on/off states.</p>
-<h1><a class="anchor" id="autotoc_md8"></a>
-&lt;tt&gt;drawPixel(x,y,color)&lt;/tt&gt;</h1>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> drawPixel(int16_t x, int16_t y, uint16_t color) <span class="keyword">override</span>; <span class="comment">// essential for GFX </span></div>
-</div><!-- fragment --><p >This is an override for the Adafruit_GFX library <code>drawPixel()</code> method. It allows the Adafruit_GFX library to draw into our pixel array. See <code>setPixel()</code> and <code>getPixel()</code>.</p>
-<h1><a class="anchor" id="autotoc_md9"></a>
-&lt;tt&gt;setClockMode(mode)&lt;/tt&gt;</h1>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> setClockMode(<span class="keywordtype">int</span> m);</div>
-</div><!-- fragment --><p >The AS1100 chips can be driven by an external clock (See AS1100 data sheet). This is called by begin().</p>
-<h1><a class="anchor" id="autotoc_md10"></a>
-&lt;tt&gt;displayTest(state)&lt;/tt&gt;</h1>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> displayTest(<span class="keywordtype">boolean</span> state);</div>
-</div><!-- fragment --><p >This is a LED test. Regardless of programming, this turns on all LEDs if state=true and off if state=false.</p>
-<p >It's useful to check that you don't have any burned out LEDs.</p>
-<h1><a class="anchor" id="autotoc_md11"></a>
-&lt;tt&gt;setBinaryMode()&lt;/tt&gt;</h1>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> setBinaryMode();</div>
-</div><!-- fragment --><p >Sets the panels into binary mode which allows us to address each pixel separately. The AS1100 is basically intended for 7 segment displays. This is called during begin().</p>
-<h1><a class="anchor" id="autotoc_md12"></a>
-&lt;tt&gt;setScan(digits)&lt;/tt&gt;</h1>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> setScan(<span class="keywordtype">int</span> totaldigits);</div>
-</div><!-- fragment --><p >Used to configure the AS1100 number of digit lines (8). This is used by begin() so you don't need to call it.</p>
-<h1><a class="anchor" id="autotoc_md13"></a>
-&lt;tt&gt;setIntensity(level,chip)&lt;/tt&gt;</h1>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> setIntensity(<span class="keywordtype">int</span> level,<span class="keywordtype">int</span> chip);</div>
-</div><!-- fragment --><p >Sets the intensity of one AS1100 chip (character) or ALL chips if chip=-1. Note you cannot set the intensity of individual LEDs.</p>
-<p >The range of level is 0-32. <code>begin()</code> sets the initial intensity to 5.</p>
-<h1><a class="anchor" id="autotoc_md14"></a>
-&lt;tt&gt;setIndividualIntensity(chipArray)&lt;/tt&gt;</h1>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> setIndividualIntensity(<span class="keywordtype">int</span> chips[]); <span class="comment">// provide an array of intensities, one per chip</span></div>
-</div><!-- fragment --><p >This allows you to set the intensity of each character in one go. You provide an array of intensity values.</p>
-<p >Note that the code does not check if the length of chips is correct</p>
-<h1><a class="anchor" id="autotoc_md15"></a>
-&lt;tt&gt;displayOn(state)&lt;/tt&gt;</h1>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> displayOn(<span class="keywordtype">int</span> state</div>
-</div><!-- fragment --><p >The entire matrix is turned on when state=1 and off when state=0. The panel can still be programmed whilst the display is off it just won't appear till you turn the display on again.</p>
-<h1><a class="anchor" id="autotoc_md16"></a>
-&lt;tt&gt;sendPixels()&lt;/tt&gt;</h1>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> sendPixels();</div>
-</div><!-- fragment --><p >Called by <code>display()</code> to send the pixel array to the panel. <code>display()</code> is just a convenience wrapper to make the code more readable. Other LCD panels, like the SD1306, is <code>display()</code> as a command to send the pixel buffer to the display.</p>
-<h1><a class="anchor" id="autotoc_md17"></a>
-&lt;tt&gt;setPixel(x,y,on)&lt;/tt&gt;</h1>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> setPixel(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y,uint8_t on); <span class="comment">// pixels can only be on or off</span></div>
-</div><!-- fragment --><p >This does all the necessary jiggery pokery to set segment bits in the pixel array for the AS1100 chip corresponding to the X position.</p>
-<p >Is on=1 the LED will be on after display() is called. If zero then the LED will be off</p>
-<h1><a class="anchor" id="autotoc_md18"></a>
-&lt;tt&gt;getPixel(x,y)&lt;/tt&gt;</h1>
-<div class="fragment"><div class="line">uint8_t getPixel(<span class="keywordtype">int</span> x,<span class="keywordtype">int</span> y);</div>
-</div><!-- fragment --><p >returns the pixel state at <code>x</code>, <code>y</code> as 0 (off) or 1 (on)</p>
-<h1><a class="anchor" id="autotoc_md19"></a>
-&lt;tt&gt;scrollRow(dir,row,wrap)&lt;/tt&gt;</h1>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> scrollRow(<span class="keywordtype">int</span> dir,<span class="keywordtype">int</span> row,<span class="keywordtype">bool</span> wrap);</div>
-</div><!-- fragment --><p >Scrolls a row of pixels using <code>getPixel()</code> and <code>setPixel()</code>. This needs to be reinvented to shift bit patterns in the pixel array to speed it up. You need to call display() to show changes.</p>
-<p >Pixels are shifted by one position on each call.</p>
-<div class="fragment"><div class="line">dir   1 means left to right, -1 means right to left</div>
-<div class="line">row   0-7, the row to be scrolled</div>
-<div class="line">wrap  <span class="keywordflow">if</span> <span class="keyword">true</span> wrap the scrolling</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md20"></a>
-&lt;tt&gt;scrollRows(dir,wrap)&lt;/tt&gt;</h1>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> scrollRows(<span class="keywordtype">int</span> dir,<span class="keywordtype">bool</span> wrap);</div>
-</div><!-- fragment --><p >Scrolls all rows at the same time.</p>
-<h1><a class="anchor" id="autotoc_md21"></a>
-&lt;tt&gt;scrollColumn(dir,col,wrap)&lt;/tt&gt;</h1>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> scrollColumn(<span class="keywordtype">int</span> dir,<span class="keywordtype">int</span> col,<span class="keywordtype">bool</span> wrap);</div>
-</div><!-- fragment --><p >Scrolls a column of pixels up or down (The Matrix effect - only smaller)</p>
-<div class="fragment"><div class="line">dir   1 means left to right, -1 means right to left</div>
-<div class="line">row   0-7, the row to be scrolled</div>
-<div class="line">wrap  <span class="keywordflow">if</span> <span class="keyword">true</span> wrap the scrolling</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md22"></a>
-&lt;tt&gt;scrollColumns(dir,wrap)&lt;/tt&gt;</h1>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> scrollColumns(<span class="keywordtype">int</span> dir,<span class="keywordtype">bool</span> wrap);</div>
-</div><!-- fragment --><p >Scrolls all columns up or down one pixel on each call.</p>
-<h1><a class="anchor" id="autotoc_md23"></a>
-&lt;tt&gt;dumpPixels()&lt;/tt&gt;</h1>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> dumpPixels();</div>
-</div><!-- fragment --><p >A debugging method - outputs the contents of the pixel array to the serial monitor port as a series of 1's and spaces. Spaces represent LEDs in the off state. It looks like this :-</p>
-<p ><img src="/pics/dumpPixels.jpg" alt="Screenshot of output from `dumpPixels`" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md24"></a>
 Pixel array</h1>
 <div class="fragment"><div class="line">uint8_t *pixels[8]; </div>
 </div><!-- fragment --><p >Each AS1100 chip controls 8 digit lines (rows) and 6 segment lines (columns). The six segment lines are stored in the pixel array hence it is an array of uint8_t. In order to accommodate variable length panels the array is organised as 8 rows of arrays of uint8_t of which only the 6 bottom bits are used - corresponding to the 6 segment outputs of the AS1100.</p>
 <p >This arrangement has the advantage that the pixel array can be sent to the chips without alteration to speed up the <code>sendPixels()</code> method.</p>
-<h1><a class="anchor" id="autotoc_md25"></a>
+<h1><a class="anchor" id="autotoc_md3"></a>
 &lt;tt&gt;Adafruit_GFX&lt;/tt&gt;</h1>
 <p >The driver library subclasses the Adafruit_GFX library thus allowing you to use the routines to write text or draw on the panel.</p>
 <p >NOTE: Adafruit routines often expect <code>uint16_t</code> not <code>int</code> data types, so you may need to cast <code>int</code>s to <code>uint16_t</code> like this:-</p>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classPanel.html">Panel</a> p(...);</div>
 <div class="line">p.drawLine((uint16_t) x0,(uint16_t) y0,(uint16_t) x1,uint(16_t) y1,(uint16_t) color);</div>
+<div class="ttc" id="aclassPanel_html"><div class="ttname"><a href="classPanel.html">Panel</a></div><div class="ttdef"><b>Definition:</b> CH_AS1100.h:14</div></div>
 </div><!-- fragment --><p >...or use uint16_t in your code.</p>
 <p >Note the Adafruit_GFX routines expect a color argument. Since the panel LEDs can only be on or off this library sets the LED on if color &gt; 0 and off if 0. </p>
 </div></div><!-- contents -->
