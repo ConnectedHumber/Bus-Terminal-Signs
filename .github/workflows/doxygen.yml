@@ -5,17 +5,18 @@ on:
     branches:
       - master
       - add/doxygen
-      - "*"
-    # paths:
-    #   - Code/CH_AS1100.cpp
-    #   - Code/CH_AS1100.h
+    paths:
+      - .github/workflows/doxygen.yml
+      - Code/CH_AS1100.cpp
+      - Code/CH_AS1100.h
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Doxygen Action
         uses: mattnotmitt/doxygen-action@1.9.5
@@ -23,4 +24,5 @@ jobs:
           doxyfile-path: ./Doxyfile
           working-directory: .
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
