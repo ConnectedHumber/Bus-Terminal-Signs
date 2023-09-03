@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['panel_0',['Panel',['../class_panel.html',1,'']]]
+  ['panel_0',['Panel',['../classPanel.html',1,'']]]
 ];

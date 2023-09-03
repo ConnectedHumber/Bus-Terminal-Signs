@@ -25,33 +25,36 @@
 var NAVTREE =
 [
   [ "Bus Terminal Signs", "index.html", [
-    [ "Hull Bus Terminal Signs", "index.html", "index" ],
-    [ "Code", "md__code_2_r_e_a_d_m_e.html", [
-      [ "Includes", "md__code_2_r_e_a_d_m_e.html#autotoc_md1", null ],
-      [ "constructor", "md__code_2_r_e_a_d_m_e.html#autotoc_md2", null ],
-      [ "<tt>begin()</tt>", "md__code_2_r_e_a_d_m_e.html#autotoc_md3", null ],
-      [ "<tt>display()</tt>", "md__code_2_r_e_a_d_m_e.html#autotoc_md4", null ],
-      [ "<tt>fillDisplay(state)</tt>", "md__code_2_r_e_a_d_m_e.html#autotoc_md5", null ],
-      [ "<tt>clearDisplay()</tt>", "md__code_2_r_e_a_d_m_e.html#autotoc_md6", null ],
-      [ "<tt>invertDisplay()</tt>", "md__code_2_r_e_a_d_m_e.html#autotoc_md7", null ],
-      [ "<tt>drawPixel(x,y,color)</tt>", "md__code_2_r_e_a_d_m_e.html#autotoc_md8", null ],
-      [ "<tt>setClockMode(mode)</tt>", "md__code_2_r_e_a_d_m_e.html#autotoc_md9", null ],
-      [ "<tt>displayTest(state)</tt>", "md__code_2_r_e_a_d_m_e.html#autotoc_md10", null ],
-      [ "<tt>setBinaryMode()</tt>", "md__code_2_r_e_a_d_m_e.html#autotoc_md11", null ],
-      [ "<tt>setScan(digits)</tt>", "md__code_2_r_e_a_d_m_e.html#autotoc_md12", null ],
-      [ "<tt>setIntensity(level,chip)</tt>", "md__code_2_r_e_a_d_m_e.html#autotoc_md13", null ],
-      [ "<tt>setIndividualIntensity(chipArray)</tt>", "md__code_2_r_e_a_d_m_e.html#autotoc_md14", null ],
-      [ "<tt>displayOn(state)</tt>", "md__code_2_r_e_a_d_m_e.html#autotoc_md15", null ],
-      [ "<tt>sendPixels()</tt>", "md__code_2_r_e_a_d_m_e.html#autotoc_md16", null ],
-      [ "<tt>setPixel(x,y,on)</tt>", "md__code_2_r_e_a_d_m_e.html#autotoc_md17", null ],
-      [ "<tt>getPixel(x,y)</tt>", "md__code_2_r_e_a_d_m_e.html#autotoc_md18", null ],
-      [ "<tt>scrollRow(dir,row,wrap)</tt>", "md__code_2_r_e_a_d_m_e.html#autotoc_md19", null ],
-      [ "<tt>scrollRows(dir,wrap)</tt>", "md__code_2_r_e_a_d_m_e.html#autotoc_md20", null ],
-      [ "<tt>scrollColumn(dir,col,wrap)</tt>", "md__code_2_r_e_a_d_m_e.html#autotoc_md21", null ],
-      [ "<tt>scrollColumns(dir,wrap)</tt>", "md__code_2_r_e_a_d_m_e.html#autotoc_md22", null ],
-      [ "<tt>dumpPixels()</tt>", "md__code_2_r_e_a_d_m_e.html#autotoc_md23", null ],
-      [ "Pixel array", "md__code_2_r_e_a_d_m_e.html#autotoc_md24", null ],
-      [ "<tt>Adafruit_GFX</tt>", "md__code_2_r_e_a_d_m_e.html#autotoc_md25", null ]
+    [ "Hull Bus Terminal Signs", "index.html", [
+      [ "Introduction", "index.html#intro_sec", null ],
+      [ "Contributors", "index.html#contribs", null ]
+    ] ],
+    [ "Code", "md_Code_README.html", [
+      [ "Includes", "md_Code_README.html#autotoc_md1", null ],
+      [ "constructor", "md_Code_README.html#autotoc_md2", null ],
+      [ "<tt>begin()</tt>", "md_Code_README.html#autotoc_md3", null ],
+      [ "<tt>display()</tt>", "md_Code_README.html#autotoc_md4", null ],
+      [ "<tt>fillDisplay(state)</tt>", "md_Code_README.html#autotoc_md5", null ],
+      [ "<tt>clearDisplay()</tt>", "md_Code_README.html#autotoc_md6", null ],
+      [ "<tt>invertDisplay()</tt>", "md_Code_README.html#autotoc_md7", null ],
+      [ "<tt>drawPixel(x,y,color)</tt>", "md_Code_README.html#autotoc_md8", null ],
+      [ "<tt>setClockMode(mode)</tt>", "md_Code_README.html#autotoc_md9", null ],
+      [ "<tt>displayTest(state)</tt>", "md_Code_README.html#autotoc_md10", null ],
+      [ "<tt>setBinaryMode()</tt>", "md_Code_README.html#autotoc_md11", null ],
+      [ "<tt>setScan(digits)</tt>", "md_Code_README.html#autotoc_md12", null ],
+      [ "<tt>setIntensity(level,chip)</tt>", "md_Code_README.html#autotoc_md13", null ],
+      [ "<tt>setIndividualIntensity(chipArray)</tt>", "md_Code_README.html#autotoc_md14", null ],
+      [ "<tt>displayOn(state)</tt>", "md_Code_README.html#autotoc_md15", null ],
+      [ "<tt>sendPixels()</tt>", "md_Code_README.html#autotoc_md16", null ],
+      [ "<tt>setPixel(x,y,on)</tt>", "md_Code_README.html#autotoc_md17", null ],
+      [ "<tt>getPixel(x,y)</tt>", "md_Code_README.html#autotoc_md18", null ],
+      [ "<tt>scrollRow(dir,row,wrap)</tt>", "md_Code_README.html#autotoc_md19", null ],
+      [ "<tt>scrollRows(dir,wrap)</tt>", "md_Code_README.html#autotoc_md20", null ],
+      [ "<tt>scrollColumn(dir,col,wrap)</tt>", "md_Code_README.html#autotoc_md21", null ],
+      [ "<tt>scrollColumns(dir,wrap)</tt>", "md_Code_README.html#autotoc_md22", null ],
+      [ "<tt>dumpPixels()</tt>", "md_Code_README.html#autotoc_md23", null ],
+      [ "Pixel array", "md_Code_README.html#autotoc_md24", null ],
+      [ "<tt>Adafruit_GFX</tt>", "md_Code_README.html#autotoc_md25", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -74,7 +77,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_c_h___a_s1100_8cpp.html"
+"CH__AS1100_8cpp.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

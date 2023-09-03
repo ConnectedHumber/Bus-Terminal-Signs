@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mode_20tt_0',['&lt;tt&gt;setClockMode(mode)&lt;/tt&gt;',['../md__code_2_r_e_a_d_m_e.html#autotoc_md9',1,'']]]
+  ['panel_0',['Panel',['../classPanel.html',1,'Panel'],['../classPanel.html#af9ed631e14b5a1889a3a118b0c612163',1,'Panel::Panel()']]]
 ];

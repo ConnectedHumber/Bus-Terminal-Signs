@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['adafruit_5fgfx_20tt_0',['&lt;tt&gt;Adafruit_GFX&lt;/tt&gt;',['../md__code_2_r_e_a_d_m_e.html#autotoc_md25',1,'']]],
-  ['array_1',['Pixel array',['../md__code_2_r_e_a_d_m_e.html#autotoc_md24',1,'']]]
+  ['begin_0',['begin',['../classPanel.html#a9fcf79b0d710d8a5215391a5d4a25c8e',1,'Panel']]]
 ];
