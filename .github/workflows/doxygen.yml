@@ -1,0 +1,30 @@
+name: Create Doxygen documentation
+
+on:
+  push:
+    branches:
+      - master
+      - add/doxygen
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Doxygen Action
+        uses: mattnotmitt/doxygen-action@1.9.5
+        with:
+          doxyfile-path: ./Doxyfile
+          working-directory: .
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: docs
+          path: docs
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
