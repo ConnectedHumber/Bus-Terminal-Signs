@@ -2,7 +2,7 @@
  *
  * \section intro_sec Introduction
  *
- * Documentation for the code to run the signs.
+ * Documentation for the code to use the bus terminal signs.
  *
  * The most useful page to look at is the [Panel class](./class_panel.html).
  *
