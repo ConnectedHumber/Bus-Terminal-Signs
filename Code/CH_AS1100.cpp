@@ -30,7 +30,7 @@
 
 #define INVERTED
 
-/*
+/**
  * Panel(int dataPin,int clkPin,int loadPin, int numChips )
  *
  * initialise pins used and allocate array for pixel data
@@ -66,7 +66,7 @@ Panel::Panel(int dataPin, int clkPin, int loadPin, int numChips) : Adafruit_GFX(
     pixels[row] = new uint8_t[numChips]; // only bits 0..5 are of interest
 }
 
-/*
+/**
  * ~panel()
  *
  * frees memory used for the pixel array
@@ -78,7 +78,7 @@ Panel::~Panel()
     delete (pixels[row]);
 }
 
-/*
+/**
  *
  *
  * void dumpPixels()
@@ -103,7 +103,7 @@ void Panel::dumpPixels()
   Serial.println();
 }
 
-/*
+/**
  * showCell()
  *
  * for debugging
@@ -119,7 +119,7 @@ void Panel::showCell(int x, int y, int val)
   Serial.println(val);
 }
 
-/*
+/**
  * bool begin()
  *
  * initialises the panel. Clears the display
@@ -145,7 +145,7 @@ boolean Panel::begin()
   return true;
 }
 
-/*
+/**
  * void load()
  *
  *
@@ -168,7 +168,7 @@ void Panel::load()
 #endif
 }
 
-/*
+/**
  * void clk()
  *
  *
@@ -191,7 +191,7 @@ void Panel::clk()
 #endif
 }
 
-/*
+/**
  * void writeDigit(int digit,uint8_t d)
  *
  *
@@ -209,7 +209,7 @@ void Panel::writeDigit(int digit, uint8_t d)
   write16(0x0000 | dd | d);
 }
 
-/*
+/**
  * void write16(int data)
  *
  * sends a 16 bit word to the chips and toggles
@@ -244,7 +244,7 @@ void Panel::write16(int d)
   digitalWrite(_dataPin, LOW); // end WITH 0 - EASIER TO DEBUG
 }
 
-/*
+/**
  * void drawPixel(int16_t x,int16_t y,uint16_t color)
  *
  * called by the Adafruit GFX library to set pixels in the pixel array
@@ -269,7 +269,7 @@ void Panel::drawPixel(int16_t x, int16_t y, uint16_t color)
   setPixel(x, y, on);
 }
 
-/*
+/**
  * void display()
  *
  * sends the pixel buffer to the display
@@ -282,7 +282,7 @@ void Panel::display(void)
   sendPixels();
 }
 
-/*
+/**
  * void filLDisplay(int state)
  *
  * Sets the entire pixel buffer to off or on
@@ -306,7 +306,7 @@ void Panel::fillDisplay(int state)
   }
 }
 
-/*
+/**
  *
  * void clearDisplay()
  *
@@ -321,7 +321,7 @@ void Panel::clearDisplay(void)
   fillDisplay(0);
 }
 
-/*
+/**
  * void invertDisplay()
  *
  * switched lED states from off to on and
@@ -337,7 +337,7 @@ void Panel::invertDisplay()
       pixels[row][chip] = (!pixels[row][chip]) & 0x3F;
 }
 
-/*
+/**
  * void setIntensity(int level,int chipNum)
  *
  * if chipNum is -1 (default) sets ALL chips to same intensity level
@@ -371,7 +371,7 @@ void Panel::setIntensity(int level, int chipNum = -1)
   }
 }
 
-/*
+/**
  * void setIndividualIntensity(int chips[])
  *
  * Sets all the chips to , possibly, different
@@ -391,7 +391,7 @@ void Panel::setIndividualIntensity(int chips[])
   load();
 }
 
-/*
+/**
  * uint8_t getPixel(int col,int row)
  *
  * returns the pixel state as 1 (on) or 0 (off)
@@ -413,7 +413,7 @@ uint8_t Panel::getPixel(int col, int row)
   return (pixels[row][chip] & mask) ? 1 : 0;
 }
 
-/*
+/**
  * void setPixel(int col,int row,uint8_t value)
  *
  * col and row are bounds checked no action is taken if out of bounds
@@ -441,7 +441,7 @@ void Panel::setPixel(int col, int row, uint8_t value)
   return;
 }
 
-/*
+/**
  * void sendPixels()
  *
  * sends the pixel array to the panel chips
@@ -475,7 +475,7 @@ void Panel::sendPixels()
   // Serial.print("sendPixels time:");Serial.println(taken);
 }
 
-/*
+/**
  * void sendCmd(int data)
  *
  * sends the same command to all chips followed by load()
@@ -492,7 +492,7 @@ void Panel::sendCmd(int data)
   load();
 }
 
-/*
+/**
  * void setClockMode(int mode)
  *
  * See AS1100 datasheet
@@ -503,7 +503,7 @@ void Panel::setClockMode(int m)
   sendCmd(0x0E00 + (m & 3));
 }
 
-/*
+/**
  * void displayOn(int state)
  *
  * Turns the panel on/off. This needs to be called
@@ -522,7 +522,7 @@ void Panel::displayOn(int state)
     sendCmd(0x0C00);
 }
 
-/*
+/**
  * void displayTest(bool state)
  *
  *
@@ -537,7 +537,7 @@ void Panel::displayTest(bool state)
     sendCmd(0x0F00);
 }
 
-/*
+/**
  *
  * void setBinaryMode()
  *
@@ -551,7 +551,7 @@ void Panel::setBinaryMode()
   sendCmd(0x0900);
 }
 
-/*
+/**
  * void setScan(int totaldigits)
  *
  * Set the scan mode of the chips - ie,. telling them how many
@@ -564,7 +564,7 @@ void Panel::setScan(int totaldigits)
   sendCmd(0x0B00 + ((totaldigits - 1) & 7)); // 7 means 8 blocks of 8
 }
 
-/*
+/**
  * void scrollRow(int dir,int row,bool wrap)
  *
  * if dir>0 scroll left to right
@@ -600,7 +600,7 @@ void Panel::scrollRow(int dir, int row, bool wrap = false)
   }
 }
 
-/*
+/**
  * void scrollRows(int dir, bool wrap);
  *
  * scroll ALL rows
@@ -613,7 +613,7 @@ void Panel::scrollRows(int dir, bool wrap = false)
     scrollRow(dir, row, wrap);
 }
 
-/*
+/**
  * void scrollColumn(int dir,int col, bool wrap)
  *
  * Scrolls a single column with optional wrap around
@@ -648,7 +648,7 @@ void Panel::scrollColumn(int dir, int col, bool wrap = false)
   }
 }
 
-/*
+/**
  * void scrollColumns(int dir,bool wrap)
  *
  * scrolls all columns one row
