@@ -2,7 +2,9 @@ name: Create Doxygen documentation
 
 on:
   push:
-    # branches: [ $default-branch ]
+    branches:
+      - master
+      - add/doxygen
     paths:
       - Code/CH_AS1100.cpp
       - Code/CH_AS1100.h
