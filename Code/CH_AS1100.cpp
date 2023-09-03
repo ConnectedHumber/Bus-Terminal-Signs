@@ -6,9 +6,9 @@
  *
  * The most useful page to look at is the [Panel class](./class_panel.html).
  *
- * For hardware setup instructions see [README.md](https://github.com/ConnectedHumber/Bus-Terminal-Signs/README.md) and [Setup.md](https://github.com/ConnectedHumber/Bus-Terminal-Signs/Setup.md).
+ * For hardware setup instructions see [README.md](https://github.com/ConnectedHumber/Bus-Terminal-Signs/tree/master/README.md) and [Setup.md](https://github.com/ConnectedHumber/Bus-Terminal-Signs/tree/master/Setup.md).
  *
- * For example code see [examples](https://github.com/ConnectedHumber/Bus-Terminal-Signs/Code/examples).
+ * For example code see [examples](https://github.com/ConnectedHumber/Bus-Terminal-Signs/tree/master/Code/Examples).
  *
  * \section contribs Contributors
  *
