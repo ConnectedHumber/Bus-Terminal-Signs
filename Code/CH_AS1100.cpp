@@ -4,7 +4,7 @@
  *
  * Documentation for the code to use the Hull bus terminal signs.
  *
- * The most useful page to look at is the [Panel class](./class_panel.html).
+ * The most useful page to look at is the [Panel class](./classPanel.html).
  *
  * For hardware setup instructions see [README.md](https://github.com/ConnectedHumber/Bus-Terminal-Signs/tree/master/README.md) and [Setup.md](https://github.com/ConnectedHumber/Bus-Terminal-Signs/tree/master/Setup.md).
  *
