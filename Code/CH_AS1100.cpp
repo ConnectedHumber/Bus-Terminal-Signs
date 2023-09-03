@@ -8,6 +8,16 @@
 
 // This version : arduino pins wired to Bus Display directly. I've added no logic hardware.
 
+/*! \mainpage Hull Bus Terminal Signs
+ *
+ * \section intro_sec Introduction
+ *
+ * Documentation for the code to run the signs.
+ *
+ * The most useful page to look at is the [Panel class](./class_panel.html).
+ *
+ */
+
 #include <arduino.h>
 #include <CH_AS1100.h>
 
