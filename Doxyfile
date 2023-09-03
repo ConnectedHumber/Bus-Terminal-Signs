@@ -8,7 +8,7 @@ PROJECT_NAME           = "Bus Terminal Signs"
 PROJECT_NUMBER         = 1.0.0
 PROJECT_BRIEF          = "Hull Bus Station Dot Matrix Displays"
 PROJECT_LOGO           =
-OUTPUT_DIRECTORY       = C:/Users/alifeee/Documents/GitHub/Bus-Terminal-Signs/docs
+OUTPUT_DIRECTORY       = ./docs
 CREATE_SUBDIRS         = NO
 CREATE_SUBDIRS_LEVEL   = 8
 ALLOW_UNICODE_NAMES    = NO
@@ -124,7 +124,7 @@ WARN_LOGFILE           =
 #---------------------------------------------------------------------------
 # Configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = C:/Users/alifeee/Documents/GitHub/Bus-Terminal-Signs/Code
+INPUT                  = ./Code
 INPUT_ENCODING         = UTF-8
 INPUT_FILE_ENCODING    =
 FILE_PATTERNS          = *.c \
