@@ -1,14 +1,4 @@
-// library converted from
-// A tool to help with BUS LED Display . currently driving one 7219 ic connected too 4 7-seg cc digirs.
-// Paul Richards ee@sosgez.co.uk
-
-// 28 May 2020 04:00
-
-// #define SEND_PIXELS_OLD	// for debugging
-
-// This version : arduino pins wired to Bus Display directly. I've added no logic hardware.
-
-/*! \mainpage Hull Bus Terminal Signs
+/** \mainpage Hull Bus Terminal Signs
  *
  * \section intro_sec Introduction
  *
@@ -16,7 +6,16 @@
  *
  * The most useful page to look at is the [Panel class](./class_panel.html).
  *
+ * For hardware setup instructions see [README.md](https://github.com/ConnectedHumber/Bus-Terminal-Signs/README.md) and [Setup.md](https://github.com/ConnectedHumber/Bus-Terminal-Signs/Setup.md).
+ *
+ * \section contribs Contributors
+ *
+ * Paul Richards ee@sosgez.co.uk
+ *
+ * alifeee - alifeee.web@outlook.com
  */
+
+// #define SEND_PIXELS_OLD	// for debugging
 
 #include <arduino.h>
 #include <CH_AS1100.h>
