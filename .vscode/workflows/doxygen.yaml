@@ -5,9 +5,10 @@ on:
     branches:
       - master
       - add/doxygen
-    paths:
-      - Code/CH_AS1100.cpp
-      - Code/CH_AS1100.h
+      - "*"
+    # paths:
+    #   - Code/CH_AS1100.cpp
+    #   - Code/CH_AS1100.h
 
 jobs:
   build:
