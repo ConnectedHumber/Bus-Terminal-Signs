@@ -1,4 +1,4 @@
-/*
+/**
  * Bus sign class
  * modified from Paul Richards work May 2020
  *

@@ -1,0 +1,2 @@
+{"rule":"CD_NN","sentence":"^\\Q5 CLK Clock pin, inverted, for SPI.\\E$"}
+{"rule":"SINGULAR_VERB_AFTER_THESE_OR_THOSE","sentence":"^\\QYour code needs these includes:\\E$"}
