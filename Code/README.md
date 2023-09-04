@@ -6,13 +6,21 @@ For example code see [./Examples](./Examples/).
 
 For documentation see the [code file](./CH_AS1100.cpp) or [online documentation](https://ConnectedHumber.github.io/Bus-Terminal-Signs).
 
-The code is still under development and lacks comments to aid implementation. The code should be placed in a folder inside the Arduino library folder. On my Windows machine that's `C:\Users\brian.000\Documents\arduino\libraries\ConnectedHumber`
+## Using code
+
+The code should be placed in a folder inside the Arduino library folder. On my Windows machine that's `C:\Users\brian.000\Documents\arduino\libraries\ConnectedHumber`.
+
+Alternatively, a symbolic link can be used. This way, code changes in the cloned repository are reflected in the Arduino library area. On Windows, you can do this using
+
+```bash
+mklink /D %USERPROFILE%\Documents\Arduino\libraries\ConnectedHumber %USERPROFILE%\Documents\GitHub\Bus-Terminal-Signs\Code
+```
+
+## Protocols
 
 At this point in time the code uses bit-banging to send the signals to the panel. I intend to include SPI at some point.
 
-The library subclasses the Adafruit_GFX library and, as a result, it is possible to use the GFX drawing and text routines in addition to hardware specific routines.
-
-The `CH_AS1100.h` and `CH_AS1100.cpp` need to be installed in your Arduino library folder. I created a ConnectedHumber folder and placed these in there.
+## Notes
 
 Note that the panels can be programmed when the display is off (see `displayOn()`)
 
@@ -40,7 +48,7 @@ This arrangement has the advantage that the pixel array can be sent to the chips
 
 ## `Adafruit_GFX`
 
-The driver library subclasses the Adafruit_GFX library thus allowing you to use the routines to write text or draw on the panel.
+The library subclasses the Adafruit_GFX library and, as a result, it is possible to use the GFX drawing and text routines in addition to hardware specific routines.
 
 NOTE: Adafruit routines often expect `uint16_t` not `int` data types, so you may need to cast `int`s to `uint16_t` like this:-
 
