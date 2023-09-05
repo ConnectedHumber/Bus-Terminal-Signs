@@ -60,6 +60,6 @@ void loop()
 
 Here is the result: a pretty nice SPI signal. The peak to peak is around 5 V, a better sign than [before](../code%20information.md#oscilloscope).
 
-![Screenshot of oscilloscope, showing 16 clock pulses (channel 1), and the data trace (channel 2).](scope.BMP)
+![Screenshot of oscilloscope, showing 16 clock pulses (channel 1), and the data trace (channel 2).](images/SPI_scope.BMP)
 
 Now we can use this instead of bit banging to communicate with the screens.
