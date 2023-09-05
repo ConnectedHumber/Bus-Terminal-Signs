@@ -95,8 +95,10 @@ $(document).ready(function(){initNavTree('CH__AS1100_8cpp.html',''); initResizab
   <div class="headertitle"><div class="title">CH_AS1100.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;arduino.h&gt;</code><br />
-<code>#include &lt;<a class="el" href="CH__AS1100_8h_source.html">CH_AS1100.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="CH__AS1100_8h_source.html">CH_AS1100.h</a>&gt;</code><br />
+<code>#include &lt;arduino.h&gt;</code><br />
+<code>#include &lt;SPI.h&gt;</code><br />
+<code>#include &lt;Adafruit_GFX.h&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
@@ -104,32 +106,12 @@ Macros</h2></td></tr>
 <tr class="separator:a7a00bbae839f9cf28b3351625098234b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74e66db4b823ca34f52023cbc8060f6c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CH__AS1100_8cpp.html#a74e66db4b823ca34f52023cbc8060f6c">COLS_PER_CHIP</a>&#160;&#160;&#160;6</td></tr>
 <tr class="separator:a74e66db4b823ca34f52023cbc8060f6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae825d5124a85c836006fc90ccb743d8f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CH__AS1100_8cpp.html#ae825d5124a85c836006fc90ccb743d8f">CLK_PULSE_WIDTH</a>&#160;&#160;&#160;1</td></tr>
-<tr class="separator:ae825d5124a85c836006fc90ccb743d8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e74764aa8fe63a581c7fddc732260fd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CH__AS1100_8cpp.html#a1e74764aa8fe63a581c7fddc732260fd">LOAD_PULSE_WIDTH</a>&#160;&#160;&#160;2</td></tr>
 <tr class="separator:a1e74764aa8fe63a581c7fddc732260fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac499f2569b1f6ad29d073e082d88fe70"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CH__AS1100_8cpp.html#ac499f2569b1f6ad29d073e082d88fe70">DATA_PULSE_WIDTH</a>&#160;&#160;&#160;1</td></tr>
-<tr class="separator:ac499f2569b1f6ad29d073e082d88fe70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4e62d6b91024d80f2c12d9ee13ec639"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CH__AS1100_8cpp.html#ae4e62d6b91024d80f2c12d9ee13ec639">NEXT_PULSE_DELAY</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:ae4e62d6b91024d80f2c12d9ee13ec639"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab05995eec69c22f9170313d727c35788"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CH__AS1100_8cpp.html#ab05995eec69c22f9170313d727c35788">INVERTED</a></td></tr>
-<tr class="separator:ab05995eec69c22f9170313d727c35788"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="ae825d5124a85c836006fc90ccb743d8f" name="ae825d5124a85c836006fc90ccb743d8f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae825d5124a85c836006fc90ccb743d8f">&#9670;&#160;</a></span>CLK_PULSE_WIDTH</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CLK_PULSE_WIDTH&#160;&#160;&#160;1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a74e66db4b823ca34f52023cbc8060f6c" name="a74e66db4b823ca34f52023cbc8060f6c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a74e66db4b823ca34f52023cbc8060f6c">&#9670;&#160;</a></span>COLS_PER_CHIP</h2>
 
@@ -138,34 +120,6 @@ Macros</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define COLS_PER_CHIP&#160;&#160;&#160;6</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ac499f2569b1f6ad29d073e082d88fe70" name="ac499f2569b1f6ad29d073e082d88fe70"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac499f2569b1f6ad29d073e082d88fe70">&#9670;&#160;</a></span>DATA_PULSE_WIDTH</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define DATA_PULSE_WIDTH&#160;&#160;&#160;1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab05995eec69c22f9170313d727c35788" name="ab05995eec69c22f9170313d727c35788"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab05995eec69c22f9170313d727c35788">&#9670;&#160;</a></span>INVERTED</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define INVERTED</td>
         </tr>
       </table>
 </div><div class="memdoc">

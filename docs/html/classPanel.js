@@ -1,6 +1,6 @@
 var classPanel =
 [
-    [ "Panel", "classPanel.html#af9ed631e14b5a1889a3a118b0c612163", null ],
+    [ "Panel", "classPanel.html#ae6734fd4a1d46205b454e7feb7ec9099", null ],
     [ "~Panel", "classPanel.html#a93893b8e3923462b52e06e0003d11448", null ],
     [ "begin", "classPanel.html#a9fcf79b0d710d8a5215391a5d4a25c8e", null ],
     [ "clearDisplay", "classPanel.html#a6c9caf9137bafa0a2b9f3f75dd34fcb6", null ],

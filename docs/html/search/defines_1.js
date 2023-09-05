@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['data_5fpulse_5fwidth_0',['DATA_PULSE_WIDTH',['../CH__AS1100_8cpp.html#ac499f2569b1f6ad29d073e082d88fe70',1,'CH_AS1100.cpp']]]
+  ['load_5fpulse_5fwidth_0',['LOAD_PULSE_WIDTH',['../CH__AS1100_8cpp.html#a1e74764aa8fe63a581c7fddc732260fd',1,'CH_AS1100.cpp']]]
 ];
