@@ -58,7 +58,7 @@ void loop()
 
 ## Oscilloscope trace
 
-Here is the result: a pretty nice SPI signal. The peak to peak is around 5 V, a better sign than [before](../code%20information.md#oscilloscope).
+Here is the result: a pretty nice SPI signal. The peak to peak is around 5 V.
 
 ![Screenshot of oscilloscope, showing 16 clock pulses (channel 1), and the data trace (channel 2).](images/SPI_scope.BMP)
 
