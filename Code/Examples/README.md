@@ -6,19 +6,13 @@ Code which works with the setup described in [setup.md](../../Setup.md).
 
 [CODE](./scrolling_text.ino)
 
-This displays `"Makerspace Hull :)"` scrolling across the screen. For some reason, it breaks if I remove (the redundant) `bottomPanel`. I should figure this out (for code simplification case).
-
-## `Scrolling Text Demo.ino`
-
-[CODE](./Scrolling%20Text%20Demo.ino)
-
-The old scrolling text demo code.
+This displays `"Makerspace Hull :)"` scrolling across the screen.
 
 ## `display_test.ino`
 
 [CODE](./display_test.ino)
 
-This toggles the "display test" signal (section 8.8 of [AS1100 datasheet]) every half a second, to test the display.
+Toggles the "display test" signal (section 8.8 of [AS1100 datasheet]) every half a second, to test the display.
 
 This code should be rewritten so that it clears the display before beginning, as memory from before remains on the screen. Alternatively, it could remain as is (as the datasheet specifically describes that the display test returns to normal if turned off).
 

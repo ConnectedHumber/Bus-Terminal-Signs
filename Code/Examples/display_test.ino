@@ -1,10 +1,9 @@
 /*
- * Display test
+ * Display test. This should flash the entire display every second.
+ * @alifeee
  */
 #include <SPI.h>
 
-#define DATA_PIN 11
-#define CLK_PIN 13
 #define LOAD_PIN 5
 
 #define NUM_CHIPS 32
@@ -32,7 +31,6 @@ void setup()
 
     pinMode(LOAD_PIN, OUTPUT);
 
-    digitalWrite(CLK_PIN, HIGH);
     digitalWrite(LOAD_PIN, HIGH);
 }
 
