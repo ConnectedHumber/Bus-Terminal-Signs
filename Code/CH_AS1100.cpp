@@ -601,7 +601,7 @@ void Panel::scrollRow(int dir, int row, bool wrap = false)
  */
 void Panel::scrollRows(int dir, bool wrap = false)
 {
-  for (int row = 0; row < ROWS_PER_CHIP - 1; row++)
+  for (int row = 0; row < ROWS_PER_CHIP; row++)
     scrollRow(dir, row, wrap);
 }
 
