@@ -22,5 +22,5 @@ For instructions, see [Setup.md](./Setup.md)
 
 ## Software details
 
-- [Interfacing code](./Code/)
-- [Example code](./Code/Examples/)
+- [Code for using the panels](./Code/)
+- [Code examples](./Code/Examples/)
