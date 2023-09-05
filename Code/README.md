@@ -24,7 +24,6 @@ Your code needs these includes:
 
 ```c
 #include <arduino.h>      # may not be needed in the Arduino IDE
-#include <Adafruit_GFX.h>
 #include <CH_AS1100.h>
 ```
 
