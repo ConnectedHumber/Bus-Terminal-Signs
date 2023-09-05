@@ -13,7 +13,7 @@
 class Panel : public Adafruit_GFX
 {
 public:
-  Panel(int dataPin, int clkPin, int LoadPin, int NumChips);
+  Panel(int LoadPin, int NumChips);
   ~Panel();
 
   bool begin();                // initialises CLK,LOAD,DATA signal states
@@ -46,7 +46,6 @@ public:
 
 private:
   void load();
-  void clk();
   void write16(int d);
   void writeDigit(int digit, uint8_t d); // used by display()
 

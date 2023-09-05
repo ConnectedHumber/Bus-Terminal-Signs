@@ -1,12 +1,10 @@
 
 /*
  * SPI test
- *
+ * Probs pins 11 (Data) and 13 (Clock) with an oscilloscope to see the SPI signal
+ * @alifeee
  */
 #include <SPI.h>
-
-#define DATA_PIN 11
-#define CLK_PIN 13
 
 void setup()
 {

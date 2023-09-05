@@ -19,18 +19,16 @@
 
 // #define SEND_PIXELS_OLD	// for debugging
 
-#include <arduino.h>
 #include <CH_AS1100.h>
+#include <arduino.h>
+#include <SPI.h>
+#include <Adafruit_GFX.h>
 
 #define ROWS_PER_CHIP 8 // there are 9 rows but only 8 used
 #define COLS_PER_CHIP 6
-#define CLK_PULSE_WIDTH 1  // 1 microseconds, duration of MARK
 #define LOAD_PULSE_WIDTH 2 // 3 microseconds, duration of MARK
-#define DATA_PULSE_WIDTH 1 // 1 microseconds, duration of MARK, atually this isn't a pulse, it ensures that CLK occurs within the data pulse.
 
 #define NEXT_PULSE_DELAY 1 // 1 microseconds, duration of SPACE following MARK
-
-#define INVERTED
 
 /**
  * initialise pins used and allocate array for pixel data
@@ -41,29 +39,17 @@
  *
  */
 
-Panel::Panel(int dataPin, int clkPin, int loadPin, int numChips) : Adafruit_GFX(numChips * COLS_PER_CHIP, ROWS_PER_CHIP)
+Panel::Panel(int loadPin, int numChips) : Adafruit_GFX(numChips * COLS_PER_CHIP, ROWS_PER_CHIP)
 {
-  _dataPin = dataPin;
-  _clkPin = clkPin;
   _loadPin = loadPin;
   _numChips = numChips;
 
   _numColumns = numChips * COLS_PER_CHIP;
 
-  pinMode(dataPin, OUTPUT);
-  pinMode(clkPin, OUTPUT);
   pinMode(loadPin, OUTPUT);
 
-  digitalWrite(_dataPin, LOW);
-
-// clk and load are inverted on the control board
-#ifdef INVERTED
-  digitalWrite(_clkPin, HIGH);
+  // load is inverted on the control board
   digitalWrite(_loadPin, HIGH);
-#else
-  digitalWrite(_clkPin, LOW);
-  digitalWrite(_loadPin, LOW);
-#endif
 
   // addressing of cells is pixels[row][chip]
   for (int row = 0; row < ROWS_PER_CHIP; row++)
@@ -137,12 +123,12 @@ void Panel::showCell(int x, int y, int val)
  * initialises the panel. Clears the display
  * and makes the display visible
  *
- * initializes CLK, LOAD, DATA signal states. Sets up the panel ready to use.
+ * initializes DATA signal states. Sets up the panel ready to use.
  *
  */
 boolean Panel::begin()
 {
-
+  SPI.begin();
   // initialise pin states etc
   // some delays needed (why??)
 
@@ -169,40 +155,10 @@ boolean Panel::begin()
 void Panel::load()
 {
   // load pulse causes data to be loaded and displayed if display is on
-#ifdef INVERTED
   digitalWrite(_loadPin, LOW); // transfer from shift register to display drivers buffer
   delayMicroseconds(LOAD_PULSE_WIDTH);
   digitalWrite(_loadPin, HIGH);
   delayMicroseconds(NEXT_PULSE_DELAY);
-#else
-  digitalWrite(_loadPin, HIGH); // transfer from shift register to display drivers buffer
-  delayMicroseconds(LOAD_PULSE_WIDTH);
-  digitalWrite(_loadPin, LOW);
-  delayMicroseconds(NEXT_PULSE_DELAY);
-#endif
-}
-
-/**
- * void clk()
- *
- *
- * private function used to generate a clock pulse
- *
- */
-void Panel::clk()
-{
-  // clock is inverted on panel
-#ifdef INVERTED
-  digitalWrite(_clkPin, LOW);
-  delayMicroseconds(CLK_PULSE_WIDTH);
-  digitalWrite(_clkPin, HIGH);
-  delayMicroseconds(NEXT_PULSE_DELAY);
-#else
-  digitalWrite(_clkPin, HIGH);
-  delayMicroseconds(CLK_PULSE_WIDTH);
-  digitalWrite(_clkPin, LOW);
-  delayMicroseconds(NEXT_PULSE_DELAY);
-#endif
 }
 
 /**
@@ -240,22 +196,9 @@ void Panel::write16(int d)
 {
   // first 4 bits are don't care so we send zeros
   // caller must call load() if this is the last write16
-  int mask = 0x0800;
-  digitalWrite(_dataPin, LOW); // send leading 0b0000
-  delayMicroseconds(1);
-  clk();
-  clk();
-  clk();
-  clk();
-  // then the lower 12 bits of the word
-  for (int i = 0; i < 12; i++)
-  {
-    digitalWrite(_dataPin, (d & mask) > 0 ? HIGH : LOW);
-    delayMicroseconds(NEXT_PULSE_DELAY); // allow data to settle
-    clk();
-    mask >>= 1;
-  }
-  digitalWrite(_dataPin, LOW); // end WITH 0 - EASIER TO DEBUG
+  SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE3));
+  SPI.transfer16(d);
+  SPI.endTransaction();
 }
 
 /**
