@@ -11,6 +11,7 @@
       1. [Breadboard](#breadboard)
       2. [Other setup images](#other-setup-images)
    4. [Program Arduino with code](#program-arduino-with-code)
+   5. [Next steps](#next-steps)
 4. [If it doesn't work](#if-it-doesnt-work)
    1. [The display doesn't display anything](#the-display-doesnt-display-anything)
    2. [The display flashes pixels randomly](#the-display-flashes-pixels-randomly)
@@ -156,13 +157,18 @@ flowchart TD
 - The pins at the top of the code should match where you put them, and there are 2 chips per LED panel, so 32 across the width of a full sign.
 - Upload code to Arduino
 - Power on display with power supply
+- Press reset button on Arduino to start program!
+
+### Next steps
+
+Hopefully that worked :)
+
+If it didn't, see [below](#if-it-doesnt-work).
+
+If you want to write your own code building on the examples, you can see code documentation [online](https://ConnectedHumber.github.io/Bus-Terminal-Signs) (or [in the code](./Code/CH_AS1100.cpp)).
 
 [`CH_AS1100.h`]: ./Code
 [example code]: ./Code/Examples/Scrolling%20Text%20Demo.ino
-
-This should work!
-
-If it doesn't:
 
 ## If it doesn't work
 
