@@ -11,3 +11,5 @@ color
 Arduinos
 HV
 KITC
+
+MOSI

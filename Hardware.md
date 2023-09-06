@@ -28,18 +28,11 @@ This diagram shows how the pins on the LED sub panels are connected to the LEDs.
 
 ## Ribbon cable
 
+![Picture of ribbon cable](images/setup_ribbon-cable.png)
+
 The ribbon cable which connects the interface to the LED panel has these designations.
 
-|| PIN | USE | Description |
-| --- | --- | --- | --- |
-| 🟥 | 1 | NC ||
-|| 2 | ISET | Pull up to 5V to enable the display. |
-|| 3 | LOAD | 5V peak inverted |
-|| 4 | DOUT | From the panel, basically delayed DIN |
-|| 5 | CLK | 5V peak inverted |
-|| 6 | GND ||
-|| 7 | DIN | data to the panel - not inverted |
-|| 8 | GND ||
+See [pin designation table in README.md](./README.md#pin-designation).
 
 The LED panel inverts the CLK and LOAD signals using a hex Schmitt inverter, so you need to invert them in code OR use a Schmitt inverter.
 

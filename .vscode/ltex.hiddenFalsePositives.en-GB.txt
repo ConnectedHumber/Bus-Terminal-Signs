@@ -1,2 +1,5 @@
 {"rule":"CD_NN","sentence":"^\\Q5 CLK Clock pin, inverted, for SPI.\\E$"}
 {"rule":"SINGULAR_VERB_AFTER_THESE_OR_THOSE","sentence":"^\\QYour code needs these includes:\\E$"}
+
+{"rule":"SETUP_VERB","sentence":"^\\QHardware details\nSoftware details\nSetup\nThe parts involved\nDaisy-chaining\nSolder wires to ribbon cable\nPin designation\nConnect the sign to an Arduino\nBreadboard\nOther setup images\nProgram Arduino with code\nIf it doesn't work\nThe display doesn't display anything\nThe display flashes pixels randomly\nSomething else\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QCheck connections (no pins touching etc) with a multimeter (on continuity test mode)\nCheck SPI is sending to clock and data pins with oscilloscope\nYou can use the sketch spi_test to send a very simple repeated SPI signal to test.\\E$"}
