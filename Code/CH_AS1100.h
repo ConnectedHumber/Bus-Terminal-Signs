@@ -1,9 +1,7 @@
 /**
  * Bus sign class
+ * for interfacing with Hull Bus Station signs
  * modified from Paul Richards work May 2020
- *
- *
- *
  */
 #pragma once
 

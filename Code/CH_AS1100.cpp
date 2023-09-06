@@ -31,12 +31,9 @@
 #define NEXT_PULSE_DELAY 1 // 1 microseconds, duration of SPACE following MARK
 
 /**
- * initialise pins used and allocate array for pixel data
+ * @brief initialise pins used and allocate array for pixel data
  *
  * The panels consist of a number of AS1100 chips, one per LED sub-panel (normally one character). The full panel has 192 LEDs controlled by 32 AS1100 chips.
- *
- * It also allocates memory for the pixel (LED) data array
- *
  */
 
 Panel::Panel(int loadPin, int numChips) : Adafruit_GFX(numChips * COLS_PER_CHIP, ROWS_PER_CHIP)
@@ -57,10 +54,7 @@ Panel::Panel(int loadPin, int numChips) : Adafruit_GFX(numChips * COLS_PER_CHIP,
 }
 
 /**
- * ~panel()
- *
- * frees memory used for the pixel array
- *
+ * @brief frees memory used for the pixel array
  */
 Panel::~Panel()
 {
@@ -69,11 +63,7 @@ Panel::~Panel()
 }
 
 /**
- *
- *
- * void dumpPixels()
- *
- * displays the contents of the pixel array for debugginh
+ * @brief displays the contents of the pixel array for debugging
  *
  * A debugging method - outputs the contents of the pixel array to the serial monitor port as a series of 1's and spaces. Spaces represent LEDs in the off state. It looks like this :-
  *
@@ -102,9 +92,7 @@ void Panel::dumpPixels()
 }
 
 /**
- * showCell()
- *
- * for debugging
+ * @brief Prints the value of a specific cell to the serial monitor
  */
 
 void Panel::showCell(int x, int y, int val)
@@ -118,13 +106,9 @@ void Panel::showCell(int x, int y, int val)
 }
 
 /**
- * bool begin()
+ * @brief initialises the panel. Clears the display and makes the display visible
  *
- * initialises the panel. Clears the display
- * and makes the display visible
- *
- * initializes DATA signal states. Sets up the panel ready to use.
- *
+ * initializes LOAD signal states. Sets up the panel ready to use.
  */
 boolean Panel::begin()
 {
@@ -146,11 +130,9 @@ boolean Panel::begin()
 }
 
 /**
- * void load()
- *
- *
  * private function used to generate a load pulse
  *
+ * This is send after an SPI signal on CLOCK/DATA to tell the chip to follow the instructions from the pulse.
  */
 void Panel::load()
 {
@@ -162,15 +144,11 @@ void Panel::load()
 }
 
 /**
- * void writeDigit(int digit,uint8_t d)
- *
- *
  * private function used to set turn LEDs on/off
  * This will be called once per chip and per row
  *
  * d - pixel data
  * digit - row
- *
  */
 void Panel::writeDigit(int digit, uint8_t d)
 {
@@ -180,17 +158,13 @@ void Panel::writeDigit(int digit, uint8_t d)
 }
 
 /**
- * void write16(int data)
- *
- * sends a 16 bit word to the chips and toggles
- * the clock signal
+ * @brief sends a 16 bit word to the chips
  *
  * the user must call load() when finished.
  *
  * normally there will be one write16() per chip
- * but wehn commanding one chip the write16 may be followed by
- * noop (0x00)
- *
+ * if you only want to address one chip, you can send noop (0x00) a number of times, and then write16 for the chip you want to address
+ * (see datasheet section 8.9)
  */
 void Panel::write16(int d)
 {
@@ -202,7 +176,7 @@ void Panel::write16(int d)
 }
 
 /**
- * void drawPixel(int16_t x,int16_t y,uint16_t color)
+ * @brief use setPixel instead
  *
  * called by the Adafruit GFX library to set pixels in the pixel array
  * note this only sets pixels it doesn't clear pixels to a background
@@ -212,7 +186,6 @@ void Panel::write16(int d)
  *
  * this method delegates to setPixel() after changing the colour to 1 (on) or 0 (off)
  * Any non-zero colour value is considered to mean 'on'
- *
  */
 void Panel::drawPixel(int16_t x, int16_t y, uint16_t color)
 {
@@ -227,13 +200,11 @@ void Panel::drawPixel(int16_t x, int16_t y, uint16_t color)
 }
 
 /**
- * void display()
+ * @brief sends the pixel buffer to the display.
  *
- * sends the pixel buffer to the display
- * It a wrapper for sendPixels() to make coding easier to read. (maybe)
+ * This must be called every time after editing the pixels.
  *
- * Sends data to the AS1100 chips to light up the LEDs. Currently, this is done by bit banging. SPI comes later.
- *
+ * It a wrapper for sendPixels().
  */
 void Panel::display(void)
 {
@@ -242,14 +213,9 @@ void Panel::display(void)
 }
 
 /**
- * void filLDisplay(int state)
- *
- * Sets the entire pixel buffer to off or on
+ * @brief Sets the entire pixel buffer to off or on
  * if state is 0 the leds are all off
  * is state is non-zero the leds are all on
- *
- * Note `state=1` turns all LEDs on, `state=0` turns all LEDs off.
- *
  */
 void Panel::fillDisplay(int state)
 {
@@ -268,30 +234,18 @@ void Panel::fillDisplay(int state)
 }
 
 /**
- *
- * void clearDisplay()
- *
- * equiv to fillDisplay(0)
- *
- * just a convenience function
- *
+ * @brief equivalent to fillDisplay(0)
  */
 void Panel::clearDisplay(void)
 {
-  // convenience function
   fillDisplay(0);
 }
 
 /**
- * void invertDisplay()
- *
- * switched lED states from off to on and
- * vice versa
- *
+ * @brief switches LED states from off to on and vice versa
  */
 void Panel::invertDisplay()
 {
-  // inverts the state of all pixels
   int row, chip;
   for (row = 0; row < ROWS_PER_CHIP; row++)
     for (chip = 0; chip < _numChips; chip++)
@@ -299,16 +253,14 @@ void Panel::invertDisplay()
 }
 
 /**
- * void setIntensity(int level,int chipNum)
+ * @brief Sets the intensity of one AS1100 chip (character) or ALL chips if chip=-1.
+ * Note: you cannot set the intensity of individual LEDs.
  *
  * if chipNum is -1 (default) sets ALL chips to same intensity level
  * level can be 0..16
  * levels outside this range are ignored.
  *
- * Sets the intensity of one AS1100 chip (character) or ALL chips if chip=-1. Note you cannot set the intensity of individual LEDs.
- *
  * The range of level is 0-32. `begin()` sets the initial intensity to 5.
- *
  */
 void Panel::setIntensity(int level, int chipNum = -1)
 {
@@ -336,10 +288,7 @@ void Panel::setIntensity(int level, int chipNum = -1)
 }
 
 /**
- * void setIndividualIntensity(int chips[])
- *
- * Sets all the chips to , possibly, different
- * intensities in one go.
+ * @brief Sets all the chips' intensities with one function.
  *
  * Chips is an array of intensity levels in chip order
  * i.e chips[0] is the first chip.
@@ -347,7 +296,6 @@ void Panel::setIntensity(int level, int chipNum = -1)
  * This allows you to set the intensity of each character in one go. You provide an array of intensity values.
  *
  * Note that the code does not check if the length of chips is correct
- *
  */
 
 void Panel::setIndividualIntensity(int chips[])
@@ -359,13 +307,10 @@ void Panel::setIndividualIntensity(int chips[])
 }
 
 /**
- * uint8_t getPixel(int col,int row)
- *
- * returns the pixel state as 1 (on) or 0 (off)
+ * @brief returns a pixel state as 1 (on) or 0 (off)
  *
  * col & row are bounds checked. If the col/row is outside the
  * led array zero is returned
- *
  */
 uint8_t Panel::getPixel(int col, int row)
 { // humans like x,y order
@@ -379,18 +324,14 @@ uint8_t Panel::getPixel(int col, int row)
   uint8_t mask = 1 << (col % COLS_PER_CHIP);
   return (pixels[row][chip] & mask) ? 1 : 0;
 }
-
 /**
- * void setPixel(int col,int row,uint8_t value)
+ * @brief Toggle individual pixel. You must call display() after.
+ *
+ * Toggle one pixel with col + row. 0 is off. 1 (or anything else) is on.
  *
  * col and row are bounds checked no action is taken if out of bounds
  *
- * If value is zero clears the pixel otherwise sets the pixel
- *
  * This does all the necessary jiggery pokery to set segment bits in the pixel array for the AS1100 chip corresponding to the X position.
- *
- * Is on=1 the LED will be on after display() is called. If zero then the LED will be off
- *
  */
 void Panel::setPixel(int col, int row, uint8_t value)
 {
@@ -414,21 +355,13 @@ void Panel::setPixel(int col, int row, uint8_t value)
 }
 
 /**
- * void sendPixels()
- *
- * sends the pixel array to the panel chips
+ * @brief sends the pixel array to the panel chips
  *
  * called from display()
- *
- * Called by `display()` to send the pixel array to the panel. `display()` is just a convenience wrapper to make the code more readable. Other LCD panels, like the SD1306, is `display()` as a command to send the pixel buffer to the display.
- *
  */
 
 void Panel::sendPixels()
 {
-
-  // int start=millis();
-
   int digit, chip;
   uint8_t seg;
 
@@ -444,18 +377,10 @@ void Panel::sendPixels()
     }
     load();
   } // digit
-
-  // int end=millis();
-  // int taken=end-start;
-  // Serial.print("sendPixels time:");Serial.println(taken);
 }
 
 /**
- * void sendCmd(int data)
- *
- * sends the same command to all chips followed by load()
- *
- *
+ * @brief sends the same command to all chips followed by load()
  */
 
 void Panel::sendCmd(int data)
@@ -468,10 +393,9 @@ void Panel::sendCmd(int data)
 }
 
 /**
- * void setClockMode(int mode)
- *
  * The AS1100 chips can be driven by an external clock (See AS1100 data sheet). This is called by begin().
  *
+ * This funcion is also used to reset the display. See datasheet, section 8.10.
  */
 void Panel::setClockMode(int m)
 {
@@ -479,16 +403,12 @@ void Panel::setClockMode(int m)
 }
 
 /**
- * void displayOn(int state)
+ * @brief Turns the panel on/off. This needs to be called to see anything.
+ * Can be called to flash the display since LED state is not affected
  *
- * Turns the panel on/off. This needs to be called
- * to see anything. Can be called to flash the display
- * since LED state is not affected
+ * state 0 means off, non-zero means on
  *
- * stat=0 means off, non-zero means on
- *
- * The entire matrix is turned on when state=1 and off when state=0. The panel can still be programmed whilst the display is off it just won't appear till you turn the display on again.
- *
+ * The panel can still be programmed whilst the display is off it just won't appear till you turn the display on again.
  */
 
 void Panel::displayOn(int state)
@@ -500,12 +420,11 @@ void Panel::displayOn(int state)
 }
 
 /**
- * void displayTest(bool state)
+ * @brief LED test. Regardless of programming, this turns on/off all LEDs
  *
- * This is a LED test. Regardless of programming, this turns on all LEDs if state=true and off if state=false.
+ * on if state=true and off if state=false.
  *
  * It's useful to check that you don't have any burned out LEDs.
- *
  */
 void Panel::displayTest(bool state)
 {
@@ -517,14 +436,14 @@ void Panel::displayTest(bool state)
 }
 
 /**
- *
- * void setBinaryMode()
- *
  * This puts the chips in binary mode which allows us to
  * control which leds are on/off using the digit and segment lines
  *
- * Sets the panels into binary mode which allows us to address each pixel separately. The AS1100 is basically intended for 7 segment displays. This is called during begin().
+ * This allows us to address each pixel separately.
  *
+ * The AS1100 is basically intended for 7 segment displays, but with this we can control a dot-matrix of pixels too.
+ *
+ * See datasheet section 9.3
  */
 void Panel::setBinaryMode()
 {
@@ -532,13 +451,10 @@ void Panel::setBinaryMode()
 }
 
 /**
- * void setScan(int totaldigits)
- *
  * Set the scan mode of the chips - ie,. telling them how many
  * digits lines to use
  *
  * Used to configure the AS1100 number of digit lines (8). This is used by begin() so you don't need to call it.
- *
  */
 
 void Panel::setScan(int totaldigits)
@@ -547,23 +463,16 @@ void Panel::setScan(int totaldigits)
 }
 
 /**
- * void scrollRow(int dir,int row,bool wrap)
+ * @brief Scroll an entire row
  *
  * if dir>0 scroll left to right
  * if dir<0 scroll right to left
  *
  * wrap causes the scrolled row to wrap around.
  *
- * Scrolls a row of pixels using `getPixel()` and `setPixel()`. This needs to be reinvented to shift bit patterns in the pixel array to speed it up. You need to call display() to show changes.
+ * Uses `getPixel()` and `setPixel()`. This needs to be reinvented to shift bit patterns in the pixel array to speed it up. You need to call display() to show changes.
  *
  * Pixels are shifted by one position on each call.
- *
- * ```c
- * dir   1 means left to right, -1 means right to left
- * row   0-7, the row to be scrolled
- * wrap  if true wrap the scrolling
- * ```
- *
  */
 void Panel::scrollRow(int dir, int row, bool wrap = false)
 {
@@ -593,11 +502,7 @@ void Panel::scrollRow(int dir, int row, bool wrap = false)
 }
 
 /**
- * void scrollRows(int dir, bool wrap);
- *
- * scroll ALL rows
- *
- *
+ * @brief scroll ALL rows by calling scrollRow for each row
  */
 void Panel::scrollRows(int dir, bool wrap = false)
 {
@@ -606,9 +511,7 @@ void Panel::scrollRows(int dir, bool wrap = false)
 }
 
 /**
- * void scrollColumn(int dir,int col, bool wrap)
- *
- * Scrolls a single column with optional wrap around
+ * @brief Scrolls a single column with optional wrap around
  *
  * Scrolls a column of pixels up or down (The Matrix effect - only smaller)
  *
@@ -617,7 +520,6 @@ void Panel::scrollRows(int dir, bool wrap = false)
  * row   0-7, the row to be scrolled
  * wrap  if true wrap the scrolling
  * ```
- *
  */
 void Panel::scrollColumn(int dir, int col, bool wrap = false)
 {
@@ -649,12 +551,7 @@ void Panel::scrollColumn(int dir, int col, bool wrap = false)
 }
 
 /**
- * void scrollColumns(int dir,bool wrap)
- *
- * scrolls all columns one row
- *
- * Scrolls all columns up or down one pixel on each call.
- *
+ * @brief Scrolls all columns up or down one pixel on each call.
  */
 
 void Panel::scrollColumns(int dir, bool wrap = false)
