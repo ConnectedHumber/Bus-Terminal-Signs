@@ -105,9 +105,16 @@ Thus, to connect to a row of the display, we can plug the ribbon cable into the 
 
 ### Connect the sign to an Arduino
 
-We connect the DMX board to an Arduino to communicate with it, as well as attaching all things to power that require it. Connect LOAD to 7 (or whatever is defined in code), CLK to pin 13 (or your Arduino's SPI clock pin), DATA to pin 11 (or your Arduino's SPI MOSI pin).
+We connect the DMX board to an Arduino to communicate with it, as well as attaching all things to power that require it. Note the Arduino must be capable of outputting 5 V.
 
-Note this Arduino must be capable of outputting 5 V.
+- Connect:
+  - LOAD to 7 (or whatever is defined in code)
+  - CLK to pin 13 (or your Arduino's SPI clock pin)
+  - DATA to pin 11 (or your Arduino's SPI MOSI pin)
+  - GROUND to ground
+  - ISET to your power supply.
+- Connect the AC to DC power converter to your power supply.
+- Ensure all grounds are connected together
 
 ![Picture of setup, labelled.](./images/setup_all.svg)
 
