@@ -1,4 +1,4 @@
-# Bus-Terminal-Signs
+the # Bus-Terminal-Signs
 
 1. [Hardware details](#hardware-details)
 2. [Software details](#software-details)
@@ -175,7 +175,7 @@ If it didn't, see [below](#if-it-doesnt-work).
 If you want to write your own code building on the examples, you can see code documentation [online](https://ConnectedHumber.github.io/Bus-Terminal-Signs) (or [in the code](./Code/CH_AS1100.cpp)).
 
 [`CH_AS1100.h`]: ./Code
-[example code]: ./Code/Examples/Scrolling%20Text%20Demo.ino
+[example code]: ./Code/Examples/scrolling_text.ino
 
 ## If it doesn't work
 
