@@ -1,4 +1,4 @@
-the # Bus-Terminal-Signs
+# Bus-Terminal-Signs
 
 1. [Hardware details](#hardware-details)
 2. [Software details](#software-details)
