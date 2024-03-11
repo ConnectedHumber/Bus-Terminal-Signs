@@ -1,5 +1,7 @@
 # Bus-Terminal-Signs
 
+See blog post: <https://blog.alifeee.co.uk/hull-bus-sign/>
+
 1. [Hardware details](#hardware-details)
 2. [Software details](#software-details)
 3. [Setup](#setup)
