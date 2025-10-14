@@ -25,6 +25,7 @@ Everything we found out about these signs and Arduino code to drive them.
 
 ## Hardware details
 
+- 2 × 192×8 (192×9 but only 8 drivable) LED Matrix displays
 - See [Hardware.md](./Hardware.md).
 - See [below](#the-parts-involved)
 - [Datasheets](./Datasheets/)
